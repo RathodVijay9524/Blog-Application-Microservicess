@@ -92,7 +92,8 @@ public class UserServiceImpl implements UserService {
 	public UserDto findUserById(Long userId) {
 		User user = userRepository.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
-		user.setPosts(postWebClientService.getPostByUserId(user.getId()));
+
+		user.setPosts(postClient.getPostByUserId(user.getId()));
 		return mapper.map(user, UserDto.class);
 	}
 

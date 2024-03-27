@@ -18,13 +18,14 @@ public class CommentWebClientService {
         this.webClient = webClientBuilder.baseUrl("http://COMMENT-SERVICE").build();
     }
 
-    public Set<CommentResponse> getCommentByPostId(String postId) {
-        CommentResponse commentResponse = webClient.get()
-                .uri("/comments/posts/{postId}", postId)
-                .retrieve()
-                .bodyToMono(CommentResponse.class)
-                .block(); // Block until response is available
-        return (Set<CommentResponse>) commentResponse;
-    }
+
+//    public Set<CommentResponse> getCommentByPostId(String postId) {
+//        CommentResponse productResponse = webClient.get()
+//                .uri("/comments/posts/{postId}", postId)
+//                .retrieve()
+//                .bodyToMono(CommentResponse.class)
+//                .block(); // Block until response is available
+//        return productResponse;
+//    }
 
 }

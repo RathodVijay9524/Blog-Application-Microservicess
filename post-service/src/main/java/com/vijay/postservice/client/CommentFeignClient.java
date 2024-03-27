@@ -12,5 +12,5 @@ import java.util.Set;
 public interface CommentFeignClient {
 
     @GetMapping("/comments/posts/{postId}")
-    Set<CommentResponse> getCommentByPostId(@PathVariable String postId);
+    static Set<CommentResponse> getCommentByPostId(@PathVariable String postId);
 }

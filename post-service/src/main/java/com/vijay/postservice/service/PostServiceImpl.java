@@ -33,7 +33,7 @@ public class PostServiceImpl implements PostService {
     public List<PostResponse> findPostByUserId(Long userId) {
         List<Post> postList=postRepository.findByUserId(userId);
         postList.forEach(post -> {
-            post.setComments(commentWebClientService.getCommentByPostId(post.getId()));
+            post.setComments(CommentFeignClient.getCommentByPostId(post.getId()));
         });
         return postList.stream()
                 .map(this::convertToResponse)

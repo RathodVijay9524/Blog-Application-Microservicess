@@ -18,12 +18,12 @@ public class PostWebClientService {
         this.webClient = webClientBuilder.baseUrl("http://POST-SERVICE").build();
     }
 
-    public List<PostResponses> getPostByUserId(Long userId) {
-        PostResponses postResponses = webClient.get()
-                .uri("/posts/users/{userId}", userId)
-                .retrieve()
-                .bodyToMono(PostResponses.class)
-                .block(); // Block until response is available
-        return (List<PostResponses>) postResponses;
-    }
+//    public List<PostResponses> getPostByUserId(Long userId) {
+//        PostResponses postResponses = webClient.get()
+//                .uri("/posts/users/{userId}", userId)
+//                .retrieve()
+//                .bodyToMono(PostResponses.class)
+//                .block(); // Block until response is available
+//        return postResponses;
+//    }
 }
