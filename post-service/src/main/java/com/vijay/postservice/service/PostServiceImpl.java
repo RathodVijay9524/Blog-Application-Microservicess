@@ -2,6 +2,7 @@ package com.vijay.postservice.service;
 
 import com.vijay.postservice.client.CommentClient;
 import com.vijay.postservice.client.CommentFeignClient;
+import com.vijay.postservice.client.CommentRestClientService;
 import com.vijay.postservice.entity.Post;
 import com.vijay.postservice.model.PostRequest;
 import com.vijay.postservice.model.PostResponse;
@@ -23,11 +24,14 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private CommentFeignClient commentFeignClient;
 
+    @Autowired
+    private CommentRestClientService commentRestClientService;
+
     @Override
     public List<PostResponse> findPostByUserId(Long userId) {
         List<Post> postList=postRepository.findByUserId(userId);
         postList.forEach(post -> {
-            post.setComments(commentFeignClient.getCommentByPostId(post.getId()));
+            post.setComments(commentRestClientService.getCommentByPostId(post.getId()));
         });
         return postList.stream()
                 .map(this::convertToResponse)
