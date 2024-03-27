@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import com.vijay.client.PostClient;
 import com.vijay.client.PostFeignClient;
 import com.vijay.client.PostRestClientService;
+import com.vijay.client.PostWebClientService;
 import com.vijay.entites.User;
 import com.vijay.exceptions.BlogAPIException;
 import com.vijay.exceptions.ResourceNotFoundException;
@@ -51,6 +52,8 @@ public class UserServiceImpl implements UserService {
 	private PostFeignClient postFeignClient;
 	@Autowired
 	private PostRestClientService postRestClientService;
+	@Autowired
+	private PostWebClientService postWebClientService;
 
 	@Override
 	public UserDto getCurrentUser() {
@@ -89,8 +92,7 @@ public class UserServiceImpl implements UserService {
 	public UserDto findUserById(Long userId) {
 		User user = userRepository.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
-		List<PostResponses> postByUserId= (List<PostResponses>) postRestClientService.getPostByUserId(user.getId());
-		user.setPosts(postByUserId);
+		user.setPosts(postWebClientService.getPostByUserId(user.getId()));
 		return mapper.map(user, UserDto.class);
 	}
 

@@ -4,8 +4,6 @@ import com.vijay.postservice.model.CommentResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
-import java.util.Set;
-
 @Service
 public class CommentRestClientService {
 
@@ -17,7 +15,7 @@ public class CommentRestClientService {
                 .build();
     }
 
-    public Set<CommentResponse> getCommentByPostId(String postId) {
+    public CommentResponse getCommentByPostId(String postId) {
         CommentResponse commentResponse = restClient.get()
                 .uri("/comments/posts/{postId}", postId)
                 .retrieve()
